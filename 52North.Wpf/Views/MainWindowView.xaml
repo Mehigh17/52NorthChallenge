@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:_52North.Wpf.Views"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainPageViewModel}"
+        Icon="../Resources/gsoc_logo.png"
         MinWidth="450" MinHeight="450"
         Height="450" Width="800"
         Title="52°North WPS Client (GSoC)">
@@ -62,6 +63,7 @@
                   Margin="0,15,0,0"
                   Header="Server Processes"
                   Padding="7">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
