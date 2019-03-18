@@ -1,7 +1,8 @@
-﻿using System.Windows;
-using DryIoc;
+﻿using _52North.Model.Services;
 using _52North.Model.ViewModels;
 using _52North.Wpf.Views;
+using DryIoc;
+using System.Windows;
 
 namespace _52North.Wpf
 {
@@ -19,6 +20,9 @@ namespace _52North.Wpf
         private static IContainer CreateContainer()
         {
             var container = new Container();
+
+            // Services
+            container.Register<IWpsClient, WpsClient>(Reuse.Singleton);
 
             // View Models
             container.Register<MainWindowViewModel>();
