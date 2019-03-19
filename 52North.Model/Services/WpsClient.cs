@@ -2,10 +2,12 @@
 using _52North.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace _52North.Model.Services
 {
@@ -38,6 +40,14 @@ namespace _52North.Model.Services
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
+                var xmlSerializer = new XmlSerializer(typeof(ProcessSummaryCollection));
+
+                using (var reader = new StringReader(data))
+                {
+                    var str = reader.ToString();
+                    var processCollection = xmlSerializer.Deserialize(reader) as ProcessSummaryCollection;
+                    return processCollection.Processes;
+                }
             }
 
             switch (response.StatusCode)
