@@ -8,7 +8,7 @@ namespace _52North.Model.Services
     public interface IWpsClient : IDisposable
     {
 
-        Task<IReadOnlyList<ProcessSummary>> GetServiceProcesses(string url, string version);
+        Task<IReadOnlyList<ProcessSummary>> GetServiceProcesses(string url);
 
     }
 }

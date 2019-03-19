@@ -26,12 +26,12 @@ namespace _52North.Model.Services
             _httpClient.Dispose();
         }
 
-        public async Task<IReadOnlyList<ProcessSummary>> GetServiceProcesses(string url, string version)
+        public async Task<IReadOnlyList<ProcessSummary>> GetServiceProcesses(string url)
         {
             var uriBuilder = new UriBuilder(url);
             var parameters = HttpUtility.ParseQueryString(string.Empty);
             parameters["service"] = "WPS";
-            parameters["version"] = version;
+            parameters["version"] = "2.0.0";
             parameters["request"] = "GetCapabilities";
             uriBuilder.Query = parameters.ToString();
 
