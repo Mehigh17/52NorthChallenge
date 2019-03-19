@@ -56,9 +56,9 @@ namespace _52North.Model.Services
                     throw new WpsApiNotImplementedException();
                 case HttpStatusCode.BadRequest:
                     throw new WpsApiBadRequestException($"Unexpected response from the API. ({response.ReasonPhrase})");
+                default:
+                    throw new WpsApiBadRequestException($"Unexpected response from the API.");
             }
-
-            return null;
         }
 
     }
