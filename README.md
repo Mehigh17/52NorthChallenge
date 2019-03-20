@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./media/GSoc.png" height=200>
+    <img src="./media/GSoC.png" height=200>
     <h2><b>52°North Challenge (2019)</b></h2>
 </div>
 
