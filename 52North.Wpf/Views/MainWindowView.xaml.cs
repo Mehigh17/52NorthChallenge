@@ -14,6 +14,5 @@ namespace _52North.Wpf.Views
         {
             DataContext = vm;
         }
-
     }
 }
