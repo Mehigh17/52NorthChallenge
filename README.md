@@ -26,7 +26,7 @@ The client is still lacking some of the functionalities of the WPS Standard such
 ## Preview
 
 <div align="center">
-    <img src="./media/preview_1.png" height=400>
+    <img src="./media/preview_1.png">
 </div>
 
 ## License
