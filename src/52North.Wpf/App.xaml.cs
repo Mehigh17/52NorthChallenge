@@ -17,6 +17,9 @@ namespace _52North.Wpf
             mainWindow?.Show();
         }
 
+        /// <summary>
+        /// Creates an IoC container and registers the needed services.
+        /// </summary>
         private static IContainer CreateContainer()
         {
             var container = new Container();
