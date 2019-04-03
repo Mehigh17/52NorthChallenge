@@ -1,22 +1,16 @@
 ﻿<ArcGIS defaultAssembly="52North.ArcGis.dll" defaultNamespace="_52North.ArcGis" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Users/stanm/AppData/Local/Programs/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
   <AddInInfo id="{c8965526-0057-4da6-9168-937c3b179ae2}" version="1.0" desktopVersion="2.3.15769">
-    <Name>_52North.ArcGis</Name>
-    <Description>_52North.ArcGis description</Description>
+    <Name>ArcGIS Pro Demo Client</Name>
+    <Description>This is small Add-In developped during the 2019 Google Summer of Code code challenge.</Description>
     <Image>Images\AddinDesktop32.png</Image>
-    <Author>stanm</Author>
-    <Company>Acme</Company>
+    <Author>Mihai STAN</Author>
+    <Company>-</Company>
     <Date>03-Apr-19 18:50:00, 2019</Date>
-    <Subject>Framework</Subject>
-    <!-- Note subject can be one or more of these topics:
-                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+    <Subject>Content</Subject>
   </AddInInfo>
   <modules>
     <insertModule id="FTNorthArcGisModule" className="Module1" autoLoad="false" caption="Module1">
-      <!-- uncomment to have the control hosted on a separate tab-->
       <tabs>
-        <!--<tab id="_52North.ArcGis_Tab1" caption="New Tab">
-          <group refID="_52North.ArcGis_Group1"/>
-        </tab>-->
       </tabs>
       <groups>
         <group id="FTNorthArcGisGroup" appearsOnAddInTab="true" keytip="W1" caption="WPS">
@@ -24,7 +18,6 @@
         </group>
       </groups>
       <controls>
-        <!-- add your controls here -->
         <button id="FTNorth_OpenWindow" keytip="W2" caption="Open Client" className="ShowMainWindow" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple32.png">
           <tooltip heading="Open Client">Opens the WPS Client.<disabledText /></tooltip>
         </button>
