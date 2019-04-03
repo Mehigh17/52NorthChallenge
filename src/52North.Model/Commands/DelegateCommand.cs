@@ -32,5 +32,10 @@ namespace _52North.Model.Commands
             _action();
         }
 
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
+
     }
 }

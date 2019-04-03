@@ -21,7 +21,9 @@ This client is quite simple in its design, being built entirely on the MVVM arch
 
 Providing a WPS server url to the client, it will fetch all the process summaries and will display them in a list, allowing the user to select each process to get slightly more detailed data about it. This implementation is only done with the `GetCapabilities` function.
 
-The client is still lacking some of the functionalities of the WPS Standard such as the `DescribeProcess` function or the `Execute` function. It is although not required by the organization challenge and will not be implemented any sooner to stay within the bounds required by the organization.
+The WPS client is still lacking some of the functionalities of the WPS Standard such as the `DescribeProcess` function or the `Execute` function. It is although not required by the organization challenge and will not be implemented any sooner to stay within the bounds required by the organization.
+
+There are two clients that share the same model base, the standalone client build only with WPF, and the ArcGIS Pro Add-In built on top of the [ArcGIS Pro SDK](https://pro.arcgis.com/en/pro-app/sdk/).
 
 ## Preview
 

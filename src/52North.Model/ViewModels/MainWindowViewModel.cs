@@ -3,36 +3,33 @@ using _52North.Model.Exceptions;
 using _52North.Model.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 
 namespace _52North.Model.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
 
-        private ICommand _getProcessesCommand;
+        private DelegateCommand _getProcessesCommand;
         private string _wpsServiceUrl;
         private string _status;
         private ProcessSummaryViewModel _selectedProcess;
+        private bool _isFetchingData;
 
-        public ICommand GetProcessesCommand
+        public DelegateCommand GetProcessesCommand
         {
             get => _getProcessesCommand;
             set => Set(ref _getProcessesCommand, value);
         }
-        
         public string WpsServiceUrl
         {
             get => _wpsServiceUrl;
             set => Set(ref _wpsServiceUrl, value);
         }
-
         public ProcessSummaryViewModel SelectedProcess
         {
             get => _selectedProcess;
             set => Set(ref _selectedProcess, value);
         }
-
         public string Status
         {
             get => _status;
@@ -49,38 +46,48 @@ namespace _52North.Model.ViewModels
 
             WpsServiceUrl = "http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService";
 
-            GetProcessesCommand = new DelegateCommand(async () =>
+            GetProcessesCommand = new DelegateCommand(FetchWpsData, () => !_isFetchingData);
+        }
+
+        private async void FetchWpsData()
+        {
+            _isFetchingData = true;
+            GetProcessesCommand.RaiseCanExecuteChanged();
+
+            Status = "Fetching the process information...";
+
+            try
             {
-                Status = "Fetching the process information...";
+                var processes = await _wpsClient.GetServiceProcesses(WpsServiceUrl);
 
-                try
+                var processesVm = processes.Select(p => new ProcessSummaryViewModel
                 {
-                    var processes = await _wpsClient.GetServiceProcesses(WpsServiceUrl);
+                    Title = p.Title,
+                    Identifier = p.Identifier,
+                    Version = p.Version
+                });
 
-                    var processesVm = processes.Select(p => new ProcessSummaryViewModel
-                    {
-                        Title = p.Title,
-                        Identifier = p.Identifier,
-                        Version = p.Version
-                    });
-
-                    Processes.Clear();
-                    foreach (var vm in processesVm)
-                    {
-                        Processes.Add(vm);
-                    }
-
-                    Status = string.Empty;
-                }
-                catch (WpsApiBadRequestException e)
+                Processes.Clear();
+                foreach (var vm in processesVm)
                 {
-                    Status = $"Bad request: {e.Message}";
+                    Processes.Add(vm);
                 }
-                catch(WpsApiNotImplementedException)
-                {
-                    Status = $"Method not implemented.";
-                }
-            });
+
+                Status = string.Empty;
+            }
+            catch (WpsApiBadRequestException e)
+            {
+                Status = $"Bad request: {e.Message}";
+            }
+            catch (WpsApiNotImplementedException)
+            {
+                Status = $"Method not implemented.";
+            }
+            finally
+            {
+                _isFetchingData = false;
+                GetProcessesCommand.RaiseCanExecuteChanged();
+            }
         }
 
     }

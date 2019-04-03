@@ -1,0 +1,27 @@
+﻿<ArcGIS defaultAssembly="52North.ArcGis.dll" defaultNamespace="_52North.ArcGis" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Users/stanm/AppData/Local/Programs/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{c8965526-0057-4da6-9168-937c3b179ae2}" version="1.0" desktopVersion="2.3.15769">
+    <Name>ArcGIS Pro Demo Client</Name>
+    <Description>This is small Add-In developped during the 2019 Google Summer of Code code challenge.</Description>
+    <Image>Images\GsocLogo32.png</Image>
+    <Author>Mihai STAN</Author>
+    <Company>-</Company>
+    <Date>03-Apr-19 18:50:00, 2019</Date>
+    <Subject>Content</Subject>
+  </AddInInfo>
+  <modules>
+    <insertModule id="FTNorthArcGisModule" className="Module1" autoLoad="false" caption="Module1">
+      <tabs>
+      </tabs>
+      <groups>
+        <group id="FTNorthArcGisGroup" appearsOnAddInTab="true" keytip="W1" caption="WPS Tools">
+          <button refID="FTNorth_OpenWindow" size="large"/>
+        </group>
+      </groups>
+      <controls>
+        <button id="FTNorth_OpenWindow" keytip="W2" caption="WPS Explorer" className="ShowMainWindow" loadOnClick="true" smallImage="Images\GsocLogo16.png" largeImage="Images\GsocLogo32.png">
+          <tooltip heading="Open Explorer">Opens the WPS explorer client.<disabledText /></tooltip>
+        </button>
+      </controls>
+    </insertModule>
+  </modules>
+</ArcGIS>
