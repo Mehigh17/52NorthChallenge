@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300"
+        Title="WPS Explorer" Height="600" Width="800"
         WindowStartupLocation="CenterOwner"
     >
     <controls:ProWindow.Resources>
@@ -14,9 +14,123 @@
             <ResourceDictionary.MergedDictionaries>
                 <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- The data template of the process. Used to show a detailed version of the selected process -->
+            <DataTemplate x:Key="DetailedProcessTemplate">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Title:"
+                           Margin="0,0,15,0"/>
+                    <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           TextWrapping="WrapWithOverflow"
+                           Text="{Binding Title}"/>
+
+                    <!-- Identifier -->
+                    <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Text="Identifier:"
+                           Margin="0,0,15,0"/>
+                    <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding Identifier}"/>
+
+                    <!-- Version -->
+                    <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Text="Version:"
+                           Margin="0,0,15,0"/>
+                    <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Text="{Binding Version}"/>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </controls:ProWindow.Resources>
-    <Grid>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- WPS Uri Line -->
+            <TextBlock Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="0,0,7,0"
+                       Text="WPS Url:"/>
+
+            <TextBox Grid.Column="1"
+                     Text="{Binding WpsServiceUrl}"
+                     MaxLines="1"/>
+            <!-- - -->
+
+            <Button Grid.Column="2"
+                    Margin="7,0,0,0"
+                    Padding="2"
+                    Command="{Binding GetProcessesCommand}"
+                    Content="Get Processes"/>
+
+        </Grid>
+
+        <GroupBox Grid.Row="1"
+                  Margin="0,15,0,0"
+                  Header="Server Processes"
+                  Padding="7">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Row="0"
+                         ItemsSource="{Binding Processes}"
+                         SelectedItem="{Binding SelectedProcess, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Title}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <GridSplitter Grid.Row="1"
+                              HorizontalAlignment="Stretch"/>
+
+                <ContentControl Grid.Row="2"
+                                Margin="7"
+                                Content="{Binding SelectedProcess}"
+                                ContentTemplate="{StaticResource DetailedProcessTemplate}">
+                </ContentControl>
+            </Grid>
+        </GroupBox>
+
+        <Label Grid.Row="2"
+               Content="{Binding Status}"/>
 
     </Grid>
 </controls:ProWindow>
