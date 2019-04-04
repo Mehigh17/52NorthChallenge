@@ -42,6 +42,9 @@
     <ArcGISFolder Condition="'$(ArcGISFolder)' == ''">$(registry:HKEY_CURRENT_USER\SOFTWARE\ESRI\ArcGISPro@InstallDir)</ArcGISFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DryIoc, Version=4.0.2.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
+      <HintPath>..\packages\DryIoc.dll.4.0.2\lib\net45\DryIoc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -113,10 +116,6 @@
     </AddInContent>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DryIoc\Container.cs" />
-    <Compile Include="DryIoc\Expression.cs" />
-    <Compile Include="DryIoc\FastExpressionCompiler.cs" />
-    <Compile Include="DryIoc\ImTools.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -129,9 +128,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\52North.Model\52North.Model.csproj">
@@ -148,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="DarkImages\GsocLogo16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--
